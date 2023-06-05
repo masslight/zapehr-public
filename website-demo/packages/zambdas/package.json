@@ -1,0 +1,20 @@
+{
+  "name": "demo-zambdas",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "sls offline",
+    "build": "tsc && sls package --stage production",
+    "package": "tsc && sls package && npm run rebundle",
+    "rebundle": "bash scripts/package-for-release.sh"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "serverless": "^3.26.0",
+    "serverless-esbuild": "^1.34.0",
+    "serverless-offline": "^12.0.4"
+  }
+}

@@ -1,0 +1,49 @@
+service: lambdas
+
+frameworkVersion: '3'
+
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage, self:custom.defaultStage}
+
+custom:
+  defaultStage: local
+  serverless-offline:
+    reloadHandler: true
+    httpPort: 3001
+
+functions:
+  get-patients:
+    handler: src/get-patients/index.index
+    events:
+      - http:
+          path: get-patients
+          method: POST
+    timeout: 15
+    environment:
+      ZAPEHR_AUTH_ENDPOINT: ${file(.env/${self:provider.stage}.json):ZAPEHR_AUTH_ENDPOINT}
+      ZAPEHR_AUTH_CLIENT: ${file(.env/${self:provider.stage}.json):ZAPEHR_AUTH_CLIENT}
+      ZAPEHR_AUTH_SECRET: ${file(.env/${self:provider.stage}.json):ZAPEHR_AUTH_SECRET}
+      ZAPEHR_AUTH_AUDIENCE: ${file(.env/${self:provider.stage}.json):ZAPEHR_AUTH_AUDIENCE}
+      FHIR_API: ${file(.env/${self:provider.stage}.json):FHIR_API}
+  create-patient:
+    handler: src/create-patient/index.index
+    events:
+      - http:
+          path: create-patient
+          method: POST
+    timeout: 15
+    environment:
+      ZAPEHR_AUTH_ENDPOINT: ${file(.env/${self:provider.stage}.json):ZAPEHR_AUTH_ENDPOINT}
+      ZAPEHR_AUTH_CLIENT: ${file(.env/${self:provider.stage}.json):ZAPEHR_AUTH_CLIENT}
+      ZAPEHR_AUTH_SECRET: ${file(.env/${self:provider.stage}.json):ZAPEHR_AUTH_SECRET}
+      ZAPEHR_AUTH_AUDIENCE: ${file(.env/${self:provider.stage}.json):ZAPEHR_AUTH_AUDIENCE}
+      FHIR_API: ${file(.env/${self:provider.stage}.json):FHIR_API}
+
+plugins:
+  - serverless-offline
+  - serverless-esbuild
