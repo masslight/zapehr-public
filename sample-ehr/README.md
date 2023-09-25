@@ -14,7 +14,7 @@ Before you can run the app successfully locally, you need to configure a zapEHR 
 
 Go to [console.zapehr.com](https://console.zapehr.com). If you don't have an account, please contact us for access at <info@zapehr.com> or on [zapehr.com](https://zapehr.com).
 
-Then go to Menu -> Project Settings -> [Applications](https://console.zapehr.com/project/applications) and click "Create". Give the Application a name and description. For our sample application, we will be making an application for "Sample Application". Make the login redirect URI [https://zapehr.com](https://zapehr.com) and the allowed callback URLs [http://localhost:3000](http://localhost:3000), then click "Create". The login redirect URI is "https://zapehr.com" because we are running this locally and the login redirect URI cannot be localhost, but if you deploy an application you can change this to your application's URI.
+Then go to Services -> App (Applications) -> and click "Create". Give the Application a name and description. For our sample application, we will be making an application for "Sample Application". Make the login redirect URI [https://zapehr.com](https://zapehr.com) and the allowed callback URLs [http://localhost:3000](http://localhost:3000), then click "Create". The login redirect URI is "https://zapehr.com" because we are running this locally and the login redirect URI cannot be localhost, but if you deploy an application you can change this to your application's URI.
 
 !["Create Application" page on zapEHR](readme_images/create-application.jpg)
 
